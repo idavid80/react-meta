@@ -1,0 +1,15 @@
+.customers-section {
+    background-color: #EE9972;
+    width: 100%;
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4%;
+  height: 100vh;
+  
+  }
+
+  .stars-icon {
+    color: #F4CE14;
+}

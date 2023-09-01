@@ -1,0 +1,50 @@
+.hero-section {
+  background-color: #495e57;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.hero-text {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+}
+.hero-text > h1 {
+  color: #f4ce14;
+  line-height: 0%;
+}
+
+.hero-description {
+  width: 20%;
+  height: max-content;
+}
+.hero-image {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 10%;
+}
+
+.restaurant-food {
+  width: 20%;
+  position: absolute;
+  border-radius: 5%;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 18 rem;
+}
+
+p {
+  font-size: 1.6 rem;
+}
