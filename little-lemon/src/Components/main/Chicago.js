@@ -1,7 +1,13 @@
 import "./Chicago.css";
 import imageA from "../../icons_assets/Mario and Adrian A.jpg";
 import imageB from "../../icons_assets/Mario and Adrian b.jpg";
+
 export default function Chicago() {
+
+
+function showMore(){
+
+}
   return (
     <div id="about" className="chicago-section">
       <div className="chicago-text">
@@ -22,10 +28,10 @@ export default function Chicago() {
             a rigorous verification process.
           </p>
         </article>
-        <a href="./booking">
+        <a href="./restaurant">
           {" "}
-          <button className="chicago-button" aria-label="reserve">
-            Reserve a table
+          <button className="chicago-button" aria-label="chicago restaurant" onClick={showMore}>
+            Show more
           </button>{" "}
         </a>
       </div>

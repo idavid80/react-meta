@@ -1,0 +1,15 @@
+.feedback-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #EE9972;
+  padding-top: 3%;
+  width: 100%;
+}
+@media only screen and (max-width: 900px) {
+  .feedback-section  {
+    width: 100%;
+  }
+}

@@ -1,36 +1,9 @@
-.nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-/*    position: fixed; 
-   z-index: 100; 
-  padding: 1%;
-  background-color: #d2d2d2; */
-
-}
-/*  .logo {
-  width: 100%;
-}  */
-
-.nav-links {
-  margin-right: 3%;
-}
-
-.nav-button {
-  background-color: #d2d2d2;
-}
-.nav-button:hover {
-  background-color: #f4ce14;
-}
-/* 
-.app__flex {
+/* .app__flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
+ */
 .p-text {
   font-size: 0.8rem;
   text-align: left;
@@ -40,10 +13,10 @@
 
 }
 
-.app__navbar {
+.navbar {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 1rem 2rem;
   background: rgba(210, 210, 210, 0.65);
@@ -56,16 +29,16 @@
 }
 
 
-.app__navbar-logo {
+.navbar-logo {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.app__navbar-links {
-  flex: 1;
+.navbar-links {
+/*   flex: 1; */
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
   gap: 15px;
   list-style-type: none;
@@ -84,30 +57,28 @@
 .link:hover {
   color: gray;
 }
-.app__navbar-menu {
+.navbar-menu {
   width: 35px;
   height: 35px;
   border-radius: 50%;
   position: relative;
-
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #EDEFEE;
 }
-.app__navbar-hamburger {
+.navbar-hamburger {
   width: 70%;
   height: 70%;
   color: #495E57;
 }
 
-.app__navbar-menu > div {
+.navbar-menu > div {
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   z-index: 5;
-
   padding: 1rem;
   width: 80%;
   height: 100vh;
@@ -122,32 +93,34 @@
 
 }
 
-.app__navbar-cancel {
+.navbar-cancel {
   width: 35px;
   height: 35px;
   color: #495E57;
 }
-.app__navbar-menu > div {
+.navbar-menu > div {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 15px;
 }
-.app__navbar-menu > div > .link {
+.navbar-menu > div > .link {
   font-size: 28px;
 }
 
 @media screen and (min-width: 900px) {
-  .app__navbar-menu {
+  .navbar-menu {
       display: none;
   }
-  .app__navbar-menu > div {
+  .navbar-menu > div {
       display: none;
+  }
+  .navbar {width: 100%;
   }
 }
 
 @media screen and (max-width: 900px) {
-  .app__navbar-links {
+  .navbar-links {
       display: none;
   }
   
@@ -158,5 +131,3 @@
       font-size: 1.75rem;
   }
 }
-
- */

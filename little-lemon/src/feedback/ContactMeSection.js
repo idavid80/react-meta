@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import {
   Box,
@@ -16,11 +16,12 @@ import * as Yup from "yup";
 //import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 //import { useAlertContext } from "../context/alertContext";
-
+import StarRating from "../booking/StarRating";
+import "./ContactMeSection.css";
 const ContactMeSection = () => {
   const { isLoading, submit } = useSubmit();
- // const { onOpen } = useAlertContext();
-/*   const [selectedDate, setSelectedDate] = useState("");
+  // const { onOpen } = useAlertContext();
+  /*   const [selectedDate, setSelectedDate] = useState("");
 
   const handleDateChange = (event) => {
     const newDate = event.target.value;
@@ -28,28 +29,29 @@ const ContactMeSection = () => {
     setSelectedDate(newDate);
     //updateTimes(newDate);
   }; */
-
+  const [rating, setRating] = useState(5);
   const formik = useFormik({
     initialValues: {
-      firstName: "",
+      username: "",
       email: "",
       date: "",
-      type: "birthday",
+      reason: "birthday",
       comment: "",
+      rating: rating,
     },
     onSubmit: (values) => {
-      submit("https://marca.com", values);
+      submit("https://localhost/feedback", values);
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("Required"),
+      username: Yup.string().required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
       comment: Yup.string()
         .min(25, "Must be at least 25 characters")
         .required("Required"),
+      rating: Yup.number().required("Required"),
     }),
   });
-
-/*   useEffect(() => {
+  /*   useEffect(() => {
     if (response) {
       onOpen(response.type, response.message);
       if (response.type === "success") {
@@ -61,31 +63,24 @@ const ContactMeSection = () => {
   }, [response]);  // eslint-disable-next-line
  */
   return (
-    <div
-/*       isDarkBackground
-      backgroundColor="#512DA8"
-      py={16}
-      spacing={8} */
-    >
+/*     <div className="feedback-section"> */
       <VStack w="1024px" p={32} alignItems="flex-start">
-        <Heading as="h1" id="contactme-section">
-          Contact me
+        <Heading as="h1" id="feedback-section">
+          Your feedback is important to us
         </Heading>
         <Box p={6} rounded="md" w="100%">
           <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
               <FormControl
-                isInvalid={
-                  !!formik.errors.firstName && formik.touched.firstName
-                }
+                isInvalid={!!formik.errors.username && formik.touched.username}
               >
-                <FormLabel htmlFor="firstName">Name</FormLabel>
+                <FormLabel htmlFor="username">Username</FormLabel>
                 <Input
-                  id="firstName"
-                  name="firstName"
-                  {...formik.getFieldProps("firstName")}
+                  id="username"
+                  name="username"
+                  {...formik.getFieldProps("username")}
                 />
-                <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
+                <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
               </FormControl>
               <FormControl
                 isInvalid={!!formik.errors.email && formik.touched.email}
@@ -100,19 +95,21 @@ const ContactMeSection = () => {
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
               <FormControl>
-                <FormLabel htmlFor="type">Type of enquiry</FormLabel>
-                <Select id="type" name="type" {...formik.getFieldProps("type")}>
+                <FormLabel htmlFor="reason">Reason</FormLabel>
+                <Select
+                  id="reason"
+                  name="reason"
+                  {...formik.getFieldProps("reason")}
+                >
                   <option value="birthday">Birthday</option>
-                  <option value="anniversary">
-                  Anniversary
-                  </option>
+                  <option value="anniversary">Anniversary</option>
                   <option value="other">Other</option>
                 </Select>
               </FormControl>
               <FormControl
                 isInvalid={!!formik.errors.date && formik.touched.date}
               >
-                <FormLabel htmlFor="date">Date</FormLabel>
+                <FormLabel htmlFor="date">Your visit</FormLabel>
                 <Input
                   id="date"
                   name="date"
@@ -123,9 +120,15 @@ const ContactMeSection = () => {
               </FormControl>
 
               <FormControl
+                isInvalid={!!formik.errors.rating && formik.touched.rating}
+              >
+                <FormLabel htmlFor="rating">Valorate</FormLabel>
+                <StarRating rating={rating} setRating={setRating} />
+              </FormControl>
+              <FormControl
                 isInvalid={!!formik.errors.comment && formik.touched.comment}
               >
-                <FormLabel htmlFor="comment">Your message</FormLabel>
+                <FormLabel htmlFor="comment">Your comment</FormLabel>
                 <Textarea
                   id="comment"
                   name="comment"
@@ -146,7 +149,7 @@ const ContactMeSection = () => {
           </form>
         </Box>
       </VStack>
-    </div>
+/*     </div> */
   );
 };
 

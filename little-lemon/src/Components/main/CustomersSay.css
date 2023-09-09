@@ -1,15 +1,96 @@
 .customers-section {
-    background-color: #EE9972;
-    width: 100%;
-     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 4%;
+  background-color: #ee9972;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4%;
   height: 100vh;
+}
+
+.customers-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+.card {
+
+
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  
+
+}
+.user-title {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 5%;
+/*   height: 100%; */
+}
+.customer-card {
+  background-color: #d6c1b7;
+  width: 40%;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+border-radius: 10%;
+margin-right: 2%;
+margin-left: 2%;
+
+}
+.avatar {
+  border-radius: 50%;
+  height: 64px;
+  object-fit: cover;
+  object-position: center;
+  width: 64px;
+
+}
+.user-menu {
+  padding: 5%;
+  justify-content: center;
+
+}
+
+.rating {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+}
+.stars-icon {
+  color: #f4ce14;
+}
+
+@media only screen and (max-width: 900px) {
+  .customers-section {
+    padding-top: 14%;
+    height: 100%;
+  }
+  .card {
+    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
   }
-
-  .stars-icon {
-    color: #F4CE14;
+  .customer-card {
+margin-top: 2%;
+margin-bottom: 2%;
+height: 100%;
+width: 60%;
+}
 }

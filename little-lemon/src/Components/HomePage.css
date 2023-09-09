@@ -1,3 +1,17 @@
+button {
+  border-radius: 5px;
+  background-color: #f4ce14;
+  font-weight: bold;
+  cursor: pointer;
+}
 .root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 900px) {
+  .root {
     width: 100%;
+  }
 }

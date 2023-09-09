@@ -2,8 +2,8 @@ import React from 'react';
 import BookingForm from './BookingForm'; // Import your BookingForm component
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from your routing library
 import "./BookingPage.css";
-import Header from '../Components/header/Header';
 import chekDate from "../utilities/API";
+import NavBar from '../Components/nav/NavBar';
 
 /* const availableTimesReducer = (state, action) => {
   // Update state based on action (date)
@@ -34,8 +34,8 @@ function BookingPage() {
 
   const submitForm = async (formData) => {
     chekDate()
-    let response = await (formData.name && formData.occasion) && (formData.guests > 2) && (formData.time.slice(0,1) > chekDate().time.slice(0,2))? true : false
-
+    //let response = await (formData.name && formData.occasion) && (formData.guests > 0) && (formData.time.slice(0,1) > chekDate().time.slice(0,2))? true : false
+let response = true
     try {
     // we need backend to check booking is avaible;
     //  const response = await submitForm(formData);
@@ -51,8 +51,9 @@ function BookingPage() {
 
   return (
     <div className='booking'>
-      <Header />
-      <BookingForm submitForm={submitForm} />)
+{/*       <Header /> */}
+<NavBar/>
+      <BookingForm submitForm={submitForm} />
       {/*
       <BookingForm
         availableTimes={availableTimes}

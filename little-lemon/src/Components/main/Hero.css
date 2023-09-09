@@ -24,7 +24,7 @@
 
 .hero-description {
   width: 20%;
-  height: max-content;
+  /*   height: max-content; */
 }
 .hero-image {
   width: 50%;
@@ -47,4 +47,35 @@ h3 {
 
 p {
   font-size: 1.6 rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .hero-section {
+    flex-wrap: wrap;
+    padding-top: 12%;
+  }
+
+  .hero-text {
+    width: 100%;
+  }
+
+  .hero-description {
+    width: 80%;
+  }
+  .hero-image {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0%;
+    padding-bottom: 5%;
+  }
+
+  .restaurant-food {
+    width: 50%;
+    margin-bottom: 2%;
+    position: relative;
+    border-radius: 5%;
+  }
 }

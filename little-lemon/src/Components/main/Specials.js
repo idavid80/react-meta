@@ -33,7 +33,7 @@ export default function Specials() {
 
 
   return (
-    <main id="menu" className="Main">
+    <main id="menu" className="main">
       <div className="card-title">
         <h1>This week specials!</h1>
         <button>Online Menu</button>

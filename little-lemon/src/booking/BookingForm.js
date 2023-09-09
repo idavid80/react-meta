@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./BookingPage.css";
 import chekDate from "../utilities/API";
-
 // const BookingForm = ({ availableTimes, updateTimes, initializeTimes }) => {
 const BookingForm = ({ submitForm }) => {
   chekDate()
@@ -10,6 +9,11 @@ const BookingForm = ({ submitForm }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState([]);
   const [selectedOcassion, setSelectedOcassion] = useState("");
+
+  localStorage.setItem('name', name);
+  localStorage.setItem('guests', guests);
+  localStorage.setItem('date', selectedDate);
+  localStorage.setItem('time', selectedTime);
   // need backed to confirm available time on select day
    const availableTimes = [
     "13:00",
@@ -44,45 +48,48 @@ const BookingForm = ({ submitForm }) => {
     date: minDate,
     time: minTime,
     occasion: "birthday",
-  }); 
+  });
   const handleNameChange = (e) => {
     setName(e.target.value);
     setFormData({ ...formData, name: e.target.value });
+
   };
 
   const handleGuestChange = (e) => {
     setGuests(e.target.value);
     setFormData({ ...formData, guests: e.target.value });
+
   };
 
-  const handleDateChange = (event) => {
-    const newDate = event.target.value;
+  const handleDateChange = (e) => {
 
-    setSelectedDate(newDate);
+    setSelectedDate(e.target.value);
+    setFormData({ ...formData, date: e.target.value });
+  };
 
-    setFormData({ ...formData, date: event.target.value });
-  };
-  console.log(formData)
+  const handleTimeChange = (e) => {
 
-  const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
-    setFormData({ ...formData, time: event.target.value });
-    console.log(selectedTime);
+    setSelectedTime(e.target.value);
+    setFormData({ ...formData, time: e.target.value });
   };
-  const handleOccasionChange = (event) => {
-    setSelectedOcassion(event.target.value);
-    setFormData({ ...formData, occasion: event.target.value });
+  const handleOccasionChange = (e) => {
+    setSelectedOcassion(e.target.value);
+    setFormData({ ...formData, occasion: e.target.value });
+ 
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     submitForm(formData);
+
   };
+
+
 
   return (
     <div className="form-page">
       <form
-        className="'booking-page'"
-        style={{ display: "grid", maxWidth: "200px", gap: "20px" }}
+        className="booking-page"/* 
+        style={{ display: "grid", maxWidth: "200px", gap: "20px" }} */
         onSubmit={handleSubmit}
       >
         Book Now

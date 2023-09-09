@@ -5,21 +5,27 @@
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  height: 100vh;
-}
-
-.restaurant {
-  width: 40%;
-  border-radius: 2%;
+  height: 100%;
   padding-top: 5%;
 
+}
+h4, li{
+  font-size: large;
+}
+
+.footer-image{
+  width: 50%;
+  border-radius: 2%;
 }
 
 .footer-menu {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
   align-items: flex-start;
+  padding-bottom: 5%;
 }
 
 .copywright {
@@ -35,17 +41,31 @@ ul {
   border: 0;
 
   display: inline-block;
-  font-size: 16px;
-  margin: 10px;
+  font-size: 8px;
+
 
 }
 
 li {
     list-style: none;
-    line-height: 30px;
+/*     line-height: 30px; */
 
 }
 a:link, a:visited, a:active {
     text-decoration:none;
     color: inherit;
+}
+
+@media only screen and (max-width: 900px) {
+  .footer {
+    height: 100%;
+    
+  }
+  .restaurant {
+    width: 80%;
+
+  }
+  .footer-menu {
+    width: 80%;
+  }
 }

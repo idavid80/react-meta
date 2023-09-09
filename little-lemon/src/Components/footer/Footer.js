@@ -1,11 +1,12 @@
 import "./Footer.css";
 import React from "react";
 import restaurant from "../../icons_assets/restaurant.jpg";
+
 const Footer = () => {
   return (
     <footer id="footer" className="footer">
-      <img src={restaurant} className="restaurant" alt="restaurant" />
-      <div className="footer-menu ">
+      <img src={restaurant} className="footer-image" alt="restaurant" />
+      <div className="footer-menu">
         <ul>
           <h4>Contact</h4>
 
@@ -21,15 +22,15 @@ const Footer = () => {
           <li><a href="/#about">About</a></li>
           <li><a href="/#menu">Menu</a></li>
           <li><a href="/#reservations">Reservations</a></li>
-          <li><a href="/#order">Order online</a></li>
+          <li><a href="/booking">Order online</a></li>
           <li><a href="/#login">Login</a></li>
         </ul>
 
         <ul>
           <h4>Social Media</h4>
-          <li><a href="www.facebook.com">Facebook</a></li>
-          <li><a href="www.whatsapp.com">Whatsapp</a></li>
-          <li><a href="www.instagram.com">Instagram</a></li>
+          <li><a href="https://www.facebook.com">Facebook</a></li>
+          <li><a href="https://www.whatsapp.com">Whatsapp</a></li>
+          <li><a href="https://www.instagram.com">Instagram</a></li>
         </ul>
       </div>
       <div className="copywright">
