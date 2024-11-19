@@ -65,7 +65,7 @@ Este repositorio contiene los proyectos y aprendizajes obtenidos durante la cert
 ## 📁 **Estructura del repositorio**
 
 El repositorio está organizado por carpetas, cada una correspondiente a un curso y sus respectivos proyectos:
-
+```plaintext
 📂 Meta-Frontend-Certification/
    ├── Curso-1-Introduccion-Front-End/ 
    ├── Curso-2-JavaScript/
@@ -76,7 +76,7 @@ El repositorio está organizado por carpetas, cada una correspondiente a un curs
    ├── Curso-7-Diseño-UX-UI/
    ├── Curso-8-Proyecto-Capstone/
    ├── Curso-9-Preparacion-Entrevistas/
-
+```
 ---
 
 ## 🚀 **Proyectos destacados**
