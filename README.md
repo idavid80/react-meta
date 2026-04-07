@@ -1,5 +1,5 @@
 # Certificación Profesional: **Meta Front-End Developer**
-[🔗 Ver Demo en Vivo]([tu-url-de-vercel.app](https://react-meta-47z27jhn4-idavid80s-projects.vercel.app/)
+[🔗 Ver Demo en Vivo](https://react-meta-47z27jhn4-idavid80s-projects.vercel.app/)
 
 Este repositorio contiene los proyectos y aprendizajes obtenidos durante la certificación **Meta Front-End Developer**, ofrecida por Meta a través de Coursera. La certificación consta de 9 cursos intensivos diseñados para preparar a los estudiantes para una carrera como desarrolladores front-end.
 
