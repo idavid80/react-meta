@@ -51,15 +51,14 @@ const ContactMeSection = () => {
       onOpen();
       formik.resetForm();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [response]); 
 
   return (
    <Box 
       w="100%" 
       bg="#EE9972" 
-      // Ajustamos el padding superior: 
-      // '20' o '24' suele ser suficiente para saltar el NavBar en móvil
+
       pt={{ base: "70px", md: "40px" }} 
       pb={{ base: 8, md: 16 }} 
       display="flex" 
