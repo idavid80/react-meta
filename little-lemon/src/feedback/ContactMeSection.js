@@ -55,8 +55,16 @@ const ContactMeSection = () => {
   }, [response]); 
 
   return (
-    <Box w="100%" bg="#EE9972" py={{ base: 8, md: 16 }} display="flex" justifyContent="center">
-      
+   <Box 
+      w="100%" 
+      bg="#EE9972" 
+      // Ajustamos el padding superior: 
+      // '20' o '24' suele ser suficiente para saltar el NavBar en móvil
+      pt={{ base: "70px", md: "40px" }} 
+      pb={{ base: 8, md: 16 }} 
+      display="flex" 
+      justifyContent="center"
+    >      
       <SuccessModal 
         isOpen={isOpen} 
         onClose={onClose} 
@@ -75,7 +83,7 @@ const ContactMeSection = () => {
         
         <Box p={6} rounded="md" w="100%" bg="white" shadow="md">
           <form onSubmit={formik.handleSubmit}>
-            <VStack spacing={6}>
+            <VStack spacing={4}>
               <FormControl isInvalid={!!formik.errors.username && formik.touched.username}>
                 <FormLabel htmlFor="username">Username</FormLabel>
                 <Input
