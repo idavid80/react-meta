@@ -1,146 +1,156 @@
 import React, { useState } from "react";
-import "./BookingPage.css";
+import {
+  VStack,
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  Button,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Heading,
+  Box,
+  HStack,
+} from "@chakra-ui/react";
 import chekDate from "../utilities/API";
-// const BookingForm = ({ availableTimes, updateTimes, initializeTimes }) => {
-const BookingForm = ({ submitForm }) => {
-  chekDate()
-  const [name, setName] = useState("");
-  const [guests, setGuests] = useState(1);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState([]);
-  const [selectedOcassion, setSelectedOcassion] = useState("");
 
-  localStorage.setItem('name', name);
-  localStorage.setItem('guests', guests);
-  localStorage.setItem('date', selectedDate);
-  localStorage.setItem('time', selectedTime);
-  // need backed to confirm available time on select day
-   const availableTimes = [
-    "13:00",
-    "13:30",
-    //  "14:00",
-    "14:30",
-    "15:00",
-    //  "15:30",
-    "16:00",
-    "16:30",
-    "17:00",
-    "17:30",
-    "18:00",
-    //  "18:30",
-    "19:00",
-    "19:30",
-    "20:00",
-    //  "20:30",
-    "21:00",
-    "21:30",
-  ];
-
-  
-
-  let minDate = chekDate().date
-  let minTime = chekDate().time
+const BookingForm = ({ submitForm, activeStep, setActiveStep }) => {
+  const currentData = chekDate();
+  const minDate = currentData.date;
 
   const [formData, setFormData] = useState({
-    // Initialize your form fields here
     name: "",
-    guests: "1",
+    guests: 1,
     date: minDate,
-    time: minTime,
+    time: "13:00",
     occasion: "birthday",
   });
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    setFormData({ ...formData, name: e.target.value });
 
+  const availableTimes = [
+    "13:00", "13:30", "14:30", "15:00", "16:00", "16:30", 
+    "17:00", "17:30", "18:00", "19:00", "19:30", "20:00", "21:00", "21:30"
+  ];
+
+  const handleChange = (e) => {
+    const { id, name, value } = e.target;
+    const fieldName = id || name;
+    setFormData((prev) => ({ ...prev, [fieldName]: value }));
   };
 
-  const handleGuestChange = (e) => {
-    setGuests(e.target.value);
-    setFormData({ ...formData, guests: e.target.value });
-
+  const handleGuestChange = (valueString) => {
+    setFormData((prev) => ({ ...prev, guests: valueString }));
   };
 
-  const handleDateChange = (e) => {
-
-    setSelectedDate(e.target.value);
-    setFormData({ ...formData, date: e.target.value });
-  };
-
-  const handleTimeChange = (e) => {
-
-    setSelectedTime(e.target.value);
-    setFormData({ ...formData, time: e.target.value });
-  };
-  const handleOccasionChange = (e) => {
-    setSelectedOcassion(e.target.value);
-    setFormData({ ...formData, occasion: e.target.value });
- 
-  };
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem('booking_data', JSON.stringify(formData));
     submitForm(formData);
-
   };
-
-
 
   return (
-    <div className="form-page">
-      <form
-        className="booking-page"/* 
-        style={{ display: "grid", maxWidth: "200px", gap: "20px" }} */
-        onSubmit={handleSubmit}
-      >
-        Book Now
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={handleNameChange}
-          required
-        />
-        <label htmlFor="guests">Guests:</label>
-        <input
-          type="number"
-          id="guests"
-          value={guests}
-          onChange={handleGuestChange}
-          min="1"
-          required
-        />
-        <label htmlFor="res-date">Choose date</label>
-        <input
-          type="date"
-          id="res-date"
-          min={minDate}
-          value={selectedDate}
-          onChange={handleDateChange}
-          required
-        />
-        <label htmlFor="res-time">Choose time</label>
-        <select id="res-time" min={minTime} onChange={handleTimeChange}>
-          {availableTimes.map((time) => (
-            <option key={time}>{time}</option>
-          ))}
-        </select>
-        <label>
-          Occasion:
-          <select
-            name="occasion"
-            value={selectedOcassion}
-            onChange={handleOccasionChange}
-            required
-          >
-            <option value="birthday">Birthday</option>
-            <option value="anniversary">Anniversary</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
-        <button type="submit">Book</button>
-      </form>
-    </div>
+    <Box as="form" onSubmit={handleSubmit} w="100%">
+      <VStack spacing={5}>
+        
+        {activeStep === 0 && (
+          <VStack spacing={5} w="100%" align="stretch">
+            <Heading size="sm" color="#495e57">Personal Details</Heading>
+            <FormControl isRequired>
+              <FormLabel htmlFor="name">Full Name</FormLabel>
+              <Input
+                id="name"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
+                focusBorderColor="#f4ce14"
+              />
+            </FormControl>
+            <Button 
+              type="button" 
+              colorScheme="yellow" 
+              onClick={() => setActiveStep(1)}
+              isDisabled={!formData.name}
+            >
+              Next: Date & Time
+            </Button>
+          </VStack>
+        )}
+
+        {activeStep === 1 && (
+          <VStack spacing={5} w="100%" align="stretch">
+            <Heading size="sm" color="#495e57">Visit Details</Heading>
+            <FormControl isRequired>
+              <FormLabel htmlFor="date">Choose date</FormLabel>
+              <Input
+                id="date"
+                type="date"
+                min={minDate}
+                value={formData.date}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="time">Choose time</FormLabel>
+              <Select id="time" value={formData.time} onChange={handleChange}>
+                {availableTimes.map((t) => <option key={t} value={t}>{t}</option>)}
+              </Select>
+            </FormControl>
+            <HStack>
+              <Button type="button" variant="ghost" onClick={() => setActiveStep(0)}>
+                Back
+              </Button>
+              <Button type="button" colorScheme="yellow" flex={1} onClick={() => setActiveStep(2)}>
+                Next: Guests
+              </Button>
+            </HStack>
+          </VStack>
+        )}
+
+        {/* PASO 3: INVITADOS Y OCASIÓN (Aquí se usan las variables del error) */}
+        {activeStep === 2 && (
+          <VStack spacing={5} w="100%" align="stretch">
+            <Heading size="sm" color="#495e57">Preferences</Heading>
+            
+            <FormControl isRequired>
+              <FormLabel htmlFor="guests">Number of Guests</FormLabel>
+              <NumberInput 
+                min={1} 
+                max={10} 
+                value={formData.guests} 
+                onChange={handleGuestChange} // <--- VARIABLE USADA
+              >
+                <NumberInputField id="guests" />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+
+            <FormControl isRequired>
+              <FormLabel htmlFor="occasion">Occasion</FormLabel>
+              <Select id="occasion" value={formData.occasion} onChange={handleChange}>
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="other">Other</option>
+              </Select>
+            </FormControl>
+
+            <HStack>
+              <Button type="button" variant="ghost" onClick={() => setActiveStep(1)}>
+                Back
+              </Button>
+              <Button type="submit" bg="#f4ce14" flex={1}>
+                Make Your Reservation
+              </Button>
+            </HStack>
+          </VStack>
+        )}
+
+      </VStack>
+    </Box>
   );
 };
 

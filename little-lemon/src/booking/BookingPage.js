@@ -1,72 +1,85 @@
 import React from 'react';
-import BookingForm from './BookingForm'; // Import your BookingForm component
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from your routing library
-import "./BookingPage.css";
-import chekDate from "../utilities/API";
+import { useNavigate } from 'react-router-dom';
+import { 
+  Box, 
+  Flex, 
+  Heading, 
+  Text, 
+  VStack, 
+  Container,
+  useSteps
+} from '@chakra-ui/react';
+import BookingForm from './BookingForm'; 
 import NavBar from '../Components/nav/NavBar';
+import StepProcess from './StepProcess';
 
-/* const availableTimesReducer = (state, action) => {
-  // Update state based on action (date)
-  //const date = state.filter((item) => item !== action.item);
-  return state; // For now, return the same state
-};
- */
-
-
-
-
+const steps = [
+  { title: 'Step 1', description: 'Contact' },
+  { title: 'Step 2', description: 'Date & Time' },
+  { title: 'Step 3', description: 'Guests' },
+];
 
 function BookingPage() {
-
-/*   const [availableTimes, dispatch] = useReducer(availableTimesReducer, []);
-
-  const updateTimes = (date) => {
-    // Update available times based on the selected date
-    dispatch(date); // For now, pass the selected date directly
-  };
-
-  const initializeTimes = () => {
-    // Initialize available times
-    return ['17:00', '18:00', '19:00', '20:00', '21:00'];
-  }; */
-
   const navigate = useNavigate();
+  
+
+  const { activeStep, setActiveStep } = useSteps({
+    index: 0,
+    count: steps.length,
+  });
 
   const submitForm = async (formData) => {
-    chekDate()
-    //let response = await (formData.name && formData.occasion) && (formData.guests > 0) && (formData.time.slice(0,1) > chekDate().time.slice(0,2))? true : false
-let response = true
+    let response = true; 
     try {
-    // we need backend to check booking is avaible;
-    //  const response = await submitForm(formData);
-    //  const response = true;
       if (response === true) {
         navigate('/booking-confirmed');
       }
-
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
 
   return (
-    <div className='booking'>
-{/*       <Header /> */}
-<NavBar/>
-      <BookingForm submitForm={submitForm} />
-      {/*
-      <BookingForm
-        availableTimes={availableTimes}
-        updateTimes={updateTimes}
-        initializeTimes={initializeTimes}
-      />
-    </div>
- */}
-    </div>
+    <Flex direction="column" minH="100vh" bg="#F4F4F4" pt={{ base: 20, md: 28 }} pb={12}>
+      <Box as="header">
+        <NavBar />
+      </Box>
+
+      <Container maxW="container.lg">
+        <VStack spacing={10}>
+
+          <VStack spacing={2} textAlign="center">
+            <Heading as="h1" color="#495e57" fontSize={{ base: "3xl", md: "5xl" }}>
+              {activeStep === 2 ? "Finalize Reservation" : "Reserve a Table"}
+            </Heading>
+            <Text color="gray.600" fontSize="lg">
+              {steps[activeStep].description} - Step {activeStep + 1} of 3
+            </Text>
+          </VStack>
+
+          <Box w="100%" bg="white" p={6} borderRadius="xl" boxShadow="md">
+            <StepProcess activeStep={activeStep} setActiveStep={setActiveStep} />
+          </Box>
+
+          <Box 
+            w="100%" 
+            maxW="600px" 
+            bg="white" 
+            p={{ base: 6, md: 10 }} 
+            borderRadius="xl" 
+            boxShadow="2xl"
+          >
+
+            <BookingForm 
+              submitForm={submitForm} 
+              activeStep={activeStep} 
+              setActiveStep={setActiveStep} 
+            />
+          </Box>
+        </VStack>
+      </Container>
+    </Flex>
   );
 }
 
 export default BookingPage;
-
-
-

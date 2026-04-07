@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import {
   Box,
@@ -11,25 +11,18 @@ import {
   Select,
   Textarea,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import * as Yup from "yup";
-//import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
-//import { useAlertContext } from "../context/alertContext";
 import StarRating from "../booking/StarRating";
-import "./ContactMeSection.css";
+import SuccessModal from "../Components/SuccessModal";
+
 const ContactMeSection = () => {
-  const { isLoading, submit } = useSubmit();
-  // const { onOpen } = useAlertContext();
-  /*   const [selectedDate, setSelectedDate] = useState("");
+ 
+  const { isLoading, response, submit } = useSubmit();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleDateChange = (event) => {
-    const newDate = event.target.value;
-
-    setSelectedDate(newDate);
-    //updateTimes(newDate);
-  }; */
-  const [rating, setRating] = useState(5);
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -37,7 +30,7 @@ const ContactMeSection = () => {
       date: "",
       reason: "birthday",
       comment: "",
-      rating: rating,
+      rating: 5,
     },
     onSubmit: (values) => {
       submit("https://localhost/feedback", values);
@@ -45,35 +38,45 @@ const ContactMeSection = () => {
     validationSchema: Yup.object({
       username: Yup.string().required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
+      date: Yup.date().required("Required"),
       comment: Yup.string()
         .min(25, "Must be at least 25 characters")
         .required("Required"),
-      rating: Yup.number().required("Required"),
+      rating: Yup.number().required("Required").min(1, "Please leave a rating"),
     }),
   });
-  /*   useEffect(() => {
-    if (response) {
-      onOpen(response.type, response.message);
-      if (response.type === "success") {
-        formik.resetForm();
-      }
-      else {console.log("error response")}
-    }
 
-  }, [response]);  // eslint-disable-next-line
- */
+  useEffect(() => {
+    if (response && response.type === 'success') {
+      onOpen();
+      formik.resetForm();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response]); 
+
   return (
-/*     <div className="feedback-section"> */
-      <VStack w="1024px" p={32} alignItems="flex-start">
-        <Heading as="h1" id="feedback-section">
+    <Box w="100%" bg="#EE9972" py={{ base: 8, md: 16 }} display="flex" justifyContent="center">
+      
+      <SuccessModal 
+        isOpen={isOpen} 
+        onClose={onClose} 
+        username={formik.values.username} 
+      />
+
+      <VStack 
+        w="100%" 
+        maxW="1024px" 
+        p={{ base: 4, md: 8, lg: 12 }} 
+        alignItems="flex-start"
+      >
+        <Heading as="h1" id="feedback-section" color="white" mb={4}>
           Your feedback is important to us
         </Heading>
-        <Box p={6} rounded="md" w="100%">
+        
+        <Box p={6} rounded="md" w="100%" bg="white" shadow="md">
           <form onSubmit={formik.handleSubmit}>
-            <VStack spacing={4}>
-              <FormControl
-                isInvalid={!!formik.errors.username && formik.touched.username}
-              >
+            <VStack spacing={6}>
+              <FormControl isInvalid={!!formik.errors.username && formik.touched.username}>
                 <FormLabel htmlFor="username">Username</FormLabel>
                 <Input
                   id="username"
@@ -82,9 +85,8 @@ const ContactMeSection = () => {
                 />
                 <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
               </FormControl>
-              <FormControl
-                isInvalid={!!formik.errors.email && formik.touched.email}
-              >
+
+              <FormControl isInvalid={!!formik.errors.email && formik.touched.email}>
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <Input
                   id="email"
@@ -94,6 +96,7 @@ const ContactMeSection = () => {
                 />
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
+
               <FormControl>
                 <FormLabel htmlFor="reason">Reason</FormLabel>
                 <Select
@@ -106,9 +109,8 @@ const ContactMeSection = () => {
                   <option value="other">Other</option>
                 </Select>
               </FormControl>
-              <FormControl
-                isInvalid={!!formik.errors.date && formik.touched.date}
-              >
+
+              <FormControl isInvalid={!!formik.errors.date && formik.touched.date}>
                 <FormLabel htmlFor="date">Your visit</FormLabel>
                 <Input
                   id="date"
@@ -119,29 +121,34 @@ const ContactMeSection = () => {
                 <FormErrorMessage>{formik.errors.date}</FormErrorMessage>
               </FormControl>
 
-              <FormControl
-                isInvalid={!!formik.errors.rating && formik.touched.rating}
-              >
+              <FormControl isInvalid={!!formik.errors.rating && formik.touched.rating}>
                 <FormLabel htmlFor="rating">Valorate</FormLabel>
-                <StarRating rating={rating} setRating={setRating} />
+                <StarRating 
+                  rating={formik.values.rating} 
+                  setRating={(newRating) => formik.setFieldValue("rating", newRating)} 
+                />
+                <FormErrorMessage>{formik.errors.rating}</FormErrorMessage>
               </FormControl>
-              <FormControl
-                isInvalid={!!formik.errors.comment && formik.touched.comment}
-              >
+
+              <FormControl isInvalid={!!formik.errors.comment && formik.touched.comment}>
                 <FormLabel htmlFor="comment">Your comment</FormLabel>
                 <Textarea
                   id="comment"
                   name="comment"
-                  height={250}
+                  height={150}
                   {...formik.getFieldProps("comment")}
                 />
                 <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
               </FormControl>
+
               <Button
                 type="submit"
-                colorScheme="purple"
+                bg="#f4ce14"
+                color="black"
+                size="lg"
                 width="full"
                 isLoading={isLoading}
+                _hover={{ bg: "#e5c00d" }}
               >
                 Submit
               </Button>
@@ -149,7 +156,7 @@ const ContactMeSection = () => {
           </form>
         </Box>
       </VStack>
-/*     </div> */
+    </Box>
   );
 };
 

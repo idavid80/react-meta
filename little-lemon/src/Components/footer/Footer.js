@@ -1,42 +1,96 @@
-import "./Footer.css";
 import React from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import { 
+  Box, 
+  Flex, 
+  Heading, 
+  Text, 
+  SimpleGrid, 
+  Image, 
+  VStack, 
+  Link as ChakraLink 
+} from "@chakra-ui/react";
+
 import restaurant from "../../icons_assets/restaurant.jpg";
 
 const Footer = () => {
   return (
-    <footer id="footer" className="footer">
-      <img src={restaurant} className="footer-image" alt="restaurant" />
-      <div className="footer-menu">
-        <ul>
-          <h4>Contact</h4>
+    <Box as="footer" id="footer" w="100%" bg="#fbdabb" py={{ base: 12, md: 16 }}>
+      <Box maxW="1200px" mx="auto" px={4}>
+        
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
+          
+          <Flex justifyContent={{ base: "center", md: "flex-start" }}>
+            <Image 
+              src={restaurant} 
+              alt="Little Lemon Restaurant" 
+              borderRadius="xl" 
+              objectFit="cover"
+              w={{ base: "80%", md: "100%" }}
+              h="200px"
+              boxShadow="md"
+            />
+          </Flex>
 
-          <li><a href="mailito:info@littlelemon.com"> email</a></li>
-          <li><a href="tel:+3445145874">Phone</a></li>
-          <li><a href="https://www.google.com/search?q=9249%2BJ7+Sevilla"> Ubication</a></li>
-        </ul>
+          <VStack alignItems={{ base: "center", md: "flex-start" }} spacing={3}>
+            <Heading as="h4" size="md" color="#495E57" textTransform="uppercase" mb={2}>
+              Contact
+            </Heading>
+            <ChakraLink href="mailto:info@littlelemon.com" fontWeight="500" _hover={{ color: "gray.600" }}>
+              Email
+            </ChakraLink>
+            <ChakraLink href="tel:+3445145874" fontWeight="500" _hover={{ color: "gray.600" }}>
+              Phone
+            </ChakraLink>
+            <ChakraLink href="https://www.google.com/search?q=9249%2BJ7+Sevilla" isExternal fontWeight="500" _hover={{ color: "gray.600" }}>
+              Location (Sevilla)
+            </ChakraLink>
+          </VStack>
 
-        <ul>
-          <h4>Navigate</h4>
+          <VStack alignItems={{ base: "center", md: "flex-start" }} spacing={3}>
+            <Heading as="h4" size="md" color="#495E57" textTransform="uppercase" mb={2}>
+              Navigate
+            </Heading>
+            <ChakraLink as={HashLink} smooth to="/#home" fontWeight="500" _hover={{ color: "gray.600" }}>
+              Home
+            </ChakraLink>
+            <ChakraLink as={HashLink} smooth to="/#about" fontWeight="500" _hover={{ color: "gray.600" }}>
+              About
+            </ChakraLink>
+            <ChakraLink as={HashLink} smooth to="/#menu" fontWeight="500" _hover={{ color: "gray.600" }}>
+              Menu
+            </ChakraLink>
+            <ChakraLink as={ReactRouterLink} to="/booking" fontWeight="500" _hover={{ color: "gray.600" }}>
+              Order online
+            </ChakraLink>
+          </VStack>
 
-          <li><a href="/#home">Home</a></li>
-          <li><a href="/#about">About</a></li>
-          <li><a href="/#menu">Menu</a></li>
-          <li><a href="/#reservations">Reservations</a></li>
-          <li><a href="/booking">Order online</a></li>
-          <li><a href="/#login">Login</a></li>
-        </ul>
+          <VStack alignItems={{ base: "center", md: "flex-start" }} spacing={3}>
+            <Heading as="h4" size="md" color="#495E57" textTransform="uppercase" mb={2}>
+              Social Media
+            </Heading>
+            <ChakraLink href="https://www.facebook.com" isExternal fontWeight="500" _hover={{ color: "gray.600" }}>
+              Facebook
+            </ChakraLink>
+            <ChakraLink href="https://www.whatsapp.com" isExternal fontWeight="500" _hover={{ color: "gray.600" }}>
+              Whatsapp
+            </ChakraLink>
+            <ChakraLink href="https://www.instagram.com" isExternal fontWeight="500" _hover={{ color: "gray.600" }}>
+              Instagram
+            </ChakraLink>
+          </VStack>
 
-        <ul>
-          <h4>Social Media</h4>
-          <li><a href="https://www.facebook.com">Facebook</a></li>
-          <li><a href="https://www.whatsapp.com">Whatsapp</a></li>
-          <li><a href="https://www.instagram.com">Instagram</a></li>
-        </ul>
-      </div>
-      <div className="copywright">
-        <p>© Little Lemon </p>
-      </div>
-    </footer>
+        </SimpleGrid>
+
+        <Flex justifyContent="center" mt={16} pt={8} borderTop="1px solid rgba(0,0,0,0.1)">
+          <Text color="#495E57" fontWeight="bold">
+            © {new Date().getFullYear()} Little Lemon. All rights reserved.
+          </Text>
+        </Flex>
+
+      </Box>
+    </Box>
   );
 };
 

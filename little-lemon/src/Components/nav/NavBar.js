@@ -1,122 +1,104 @@
-// src/components/Navbar.js
-//import React, { useState } from 'react';
-//import { FiMenu } from 'react-icons/fi'; // Icono de hamburguesa
-import "./Navbar.css";
-
 import React from "react";
-import "./Navbar.css";
-import logo from "../../icons_assets/logo.svg";
-import { HiMenuAlt4, HiX } from "react-icons/hi";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import {
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  useDisclosure,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerBody,
+  VStack,
+  Image,
+} from "@chakra-ui/react";
+import { HiMenuAlt4 } from "react-icons/hi";
+import logo from "../../icons_assets/logo.svg";
+
+const navLinks = [
+  { name: "Home", path: "/", isHash: false },
+  { name: "Reservation", path: "/booking", isHash: false },
+  { name: "Feedback", path: "/feedback", isHash: true },
+  { name: "Menu", path: "/#menu", isHash: true },
+  { name: "About", path: "/#about", isHash: true },
+];
 
 const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const renderLinks = (onClickAction = null) =>
+    navLinks.map((link) => {
+      const Component = link.isHash ? HashLink : Link;
+      return (
+        <Box
+          key={link.name}
+          as={Component}
+          to={link.path}
+          smooth={link.isHash ? true : undefined}
+          onClick={onClickAction}
+          color="#495E57"
+          fontWeight="600"
+          fontSize="xl"
+          textTransform="uppercase"
+          _hover={{ color: "gray.500", textDecoration: "none" }}
+          transition="all 0.3s ease-in-out"
+        >
+          {link.name}
+        </Box>
+      );
+    });
 
   return (
-    <nav className="navbar">
-      {/* Desktop Navigation */}
+    <Box
+      as="nav"
+      position="fixed"
+      top="0"
+      left="0"
+      w="100%"
+      px={{ base: 4, md: 8 }}
+      py={4}
+      bg="rgba(244, 244, 244, 0.8)"
+      backdropFilter="blur(10px)"
+      borderBottom="1px solid rgba(0, 0, 0, 0.1)"
+      zIndex="1000"
+      fontFamily="'Markazi Text', serif"
+    >
+      <Flex justifyContent="space-between" alignItems="center" maxW="1200px" mx="auto">
+        
+        <Box as={Link} to="/">
+          <Image src={logo} alt="Little Lemon Logo" h="40px" />
+        </Box>
 
-      <div className="navbar-logo">
-        <Link className="link" to={"/"}>
-          <img src={logo} alt="logo" />
-        </Link>
-      </div>
+        <HStack as="ul" spacing={8} display={{ base: "none", md: "flex" }}>
+          {renderLinks()}
+        </HStack>
 
-      <ul className="navbar-links">
-        <Link className="link" to={"/"}>
-          Home
-        </Link>
-        <Link className="link" to={"/booking"}>
-          Reservation
-        </Link>
-        <HashLink
-          className="link"
-          to="/feedback"
-          onClick={() => {
-            setToggle(false);
-          }}
-        >
-          Feedback
-        </HashLink>
-        <HashLink className="link" smooth to="/#menu">
-          Menu
-        </HashLink>
-        <HashLink className="link" smooth to="/#about">
-          About
-        </HashLink>
-      </ul>
-
-      {/* Mobile Navigation */}
-
-      <div className="navbar-menu">
-        <HiMenuAlt4
-          onClick={() => {
-            setToggle(true);
-          }}
-          className="navbar-hamburger"
+  
+        <IconButton
+          display={{ base: "flex", md: "none" }}
+          icon={<HiMenuAlt4 size="28px" />}
+          variant="ghost"
+          color="#495E57"
+          aria-label="Open menu"
+          onClick={onOpen} // Abre el Drawer
         />
-        {toggle && (
-          <div>
-            <HiX
-              onClick={() => {
-                setToggle(false);
-              }}
-              className="navbar-cancel"
-            />
+      </Flex>
 
-            <Link
-              className="link"
-              to={"/"}
-              onClick={() => {
-                setToggle(false);
-              }}
-            >
-              Home
-            </Link>
-            <Link
-              className="link"
-              to={"/booking"}
-              onClick={() => {
-                setToggle(false);
-              }}
-            >
-              Reservation
-            </Link>
-            <Link
-              className="link"
-              to="/feedback"
-              onClick={() => {
-                setToggle(false);
-              }}
-            >
-              Feedback
-            </Link>
-            <HashLink
-              className="link"
-              smooth
-              to="/#menu"
-              onClick={() => {
-                setToggle(false);
-              }}
-            >
-              Menu
-            </HashLink>
-            <HashLink
-              className="link"
-              smooth
-              to="/#about"
-              onClick={() => {
-                setToggle(false);
-              }}
-            >
-              About
-            </HashLink>
-          </div>
-        )}
-      </div>
-    </nav>
+      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent bg="#EDEFEE">
+          <DrawerCloseButton color="#495E57" size="lg" mt={2} />
+          <DrawerBody display="flex" alignItems="center" justifyContent="center">
+            <VStack spacing={8} mt={10}>
+              {renderLinks(onClose)} 
+            </VStack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </Box>
   );
 };
 

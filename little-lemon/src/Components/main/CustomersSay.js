@@ -1,94 +1,134 @@
-import "./CustomersSay.css";
-// import star from "../images/star.jpg";
+import React from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { 
+  Box, 
+  Button, 
+  Flex, 
+  Heading, 
+  Text, 
+  SimpleGrid, 
+  Avatar, 
+  VStack, 
+  HStack, 
+  Icon 
+} from "@chakra-ui/react";
 import { AiFillStar } from "react-icons/ai";
+
 import carmen from "../../images/carmen";
 import paul from "../../images/paul";
 import chan from "../../images/chan";
 import jane from "../../images/jane";
 
-function feedback(point) {
-  return (
-    <span>
-      {Array(5)
-        .fill()
-        .map((_, index) => (
-          <AiFillStar
-            className={point > index ? "stars-icon" : ""}
-            key={index}
-          />
-        ))}
-    </span>
-  );
-}
-
 const CustomersSay = () => {
   const customers = [
     {
       name: "Carmen",
-      commment: "I lovely little restaurant",
+      comment: "A lovely little restaurant with a great atmosphere.",
       rating: 4,
       picture: carmen,
     },
     {
       name: "Chan",
-      commment:
-        "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned  with salt and olive oil",
+      comment: "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.",
       rating: 5,
       picture: chan,
     },
     {
       name: "Jane",
-      commment:
-        "Our Lemon dessert is made from grilled bread that has been smeared with garlic and seasoned  with salt and olive oil",
+      comment: "The Lemon dessert is absolutely fantastic! Refreshing and perfectly sweet.",
       rating: 3,
       picture: jane,
     },
     {
       name: "Paul",
-      commment:
-        "Great mediterranean restaurant!",
-      rating: 4.5,
+      comment: "Great mediterranean restaurant! Will definitely come back.",
+      rating: 5,
       picture: paul,
     },
-    
   ];
 
   return (
-    <main id="feedback" className="customers-section">
-      <div className="customers-title">
-        <h1>What our customers say?</h1>
+    <Flex 
+      id="feedback" 
+      as="section" 
+      w="100%" 
+      minH="100vh" 
+      bg="#ee9972" 
+      py={{ base: 12, lg: 24 }}
+      direction="column"
+      justifyContent="center"
+    >
+      <Box maxW="1200px" mx="auto" px={4} w="100%">
+        
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+          mb={12}
+        >
+          <Heading as="h2" color="white" mb={{ base: 6, md: 0 }} textAlign="center">
+            What our customers say
+          </Heading>
+          
+          <Button
+            as={ReactRouterLink}
+            to="/feedback"
+            bg="#f4ce14"
+            color="black"
+            size="lg"
+            fontWeight="bold"
+            _hover={{ bg: "#e5c00d", transform: "scale(1.05)" }}
+            transition="all 0.2s"
+          >
+            Leave Feedback
+          </Button>
+        </Flex>
 
-        <a href="./feedback">
-          {" "}
-          <button className="customers-button" aria-label="reserve">
-            Feedback
-          </button>{" "}
-        </a>
-      </div>
-      <div className="card">
-        {customers.map((customer, i) => (
-          <div key={i} className="customer-card">
-            <div className="user-title">
-              <img
-                className="avatar"
-                /*               className="customer-image" */
-                src={customer.picture}
-                alt={customer.name}
-              ></img>
-              <h3>{customer.name}</h3>
-            </div>
-            <div className="user-menu">
-            <article >
-              <p>{customer.commment}</p>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={8}>
+          {customers.map((customer, i) => (
+            <VStack
+              key={i}
+              bg="#d6c1b7"
+              p={6}
+              borderRadius="2xl"
+              boxShadow="lg"
+              alignItems="flex-start"
+              justifyContent="space-between"
+              _hover={{ transform: "translateY(-5px)", boxShadow: "xl" }}
+              transition="all 0.3s ease"
+              h="100%"
+            >
+              
+              <HStack spacing={4}>
+                <Avatar src={customer.picture} name={customer.name} size="lg" />
+                <Heading as="h3" size="md" color="#333333">
+                  {customer.name}
+                </Heading>
+              </HStack>
 
-            </article>            </div>
-            <div className="rating">
-            <h3 >{feedback(customer.rating)}</h3>
-            </div>
-          </div>
-        ))}
-      </div>
-    </main>
+              <Text color="gray.800" mt={4} fontStyle="italic" flex="1">
+                "{customer.comment}"
+              </Text>
+
+              <HStack spacing={1} mt={4}>
+                {Array(5)
+                  .fill("")
+                  .map((_, index) => (
+                    <Icon
+                      key={index}
+                      as={AiFillStar}
+                      color={customer.rating > index ? "#f4ce14" : "gray.500"}
+                      boxSize={5}
+                    />
+                  ))}
+              </HStack>
+              
+            </VStack>
+          ))}
+        </SimpleGrid>
+        
+      </Box>
+    </Flex>
   );
 };
 
