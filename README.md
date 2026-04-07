@@ -96,7 +96,7 @@ El curso fue desarrollado e impartido por **Meta Staff**, expertos en ingenierí
 ## 📫 **Contacto**
 Si tienes preguntas o sugerencias, no dudes en contactarme:
 
-- **GitHub:** [idavid80](https://github.com/idavid80))  
-- **LinkedIn:** [Mi LinkedIn](https://www.linkedin.com/in/idavid80/))  
+- **GitHub:** [idavid80](https://github.com/idavid80)
+- **LinkedIn:** [Mi LinkedIn](https://www.linkedin.com/in/idavid80/)
 
 ¡Gracias por visitar este repositorio y revisar mis proyectos! 🎉
