@@ -10,6 +10,7 @@ import {
   StepTitle,
   Stepper,
   Box,
+  VStack,
 } from '@chakra-ui/react';
 
 const steps = [
@@ -20,37 +21,58 @@ const steps = [
 
 function StepProcess({ activeStep, setActiveStep }) {
   return (
-    <Stepper 
-      size='lg' 
-      index={activeStep}
-      colorScheme="yellow" 
-      orientation={{ base: 'vertical', md: 'horizontal' }}
-      gap='0'
-      w="100%"
-    >
-      {steps.map((step, index) => (
-        <Step 
-          key={index} 
-          onClick={() => setActiveStep(index)}
-          style={{ cursor: 'pointer' }}
-        >
-          <StepIndicator>
-            <StepStatus
-              complete={<StepIcon />}
-              incomplete={<StepNumber />}
-              active={<StepNumber />}
+    <Box w="100%" py={{ base: 4, md: 2 }}>
+      <Stepper 
+        size='lg' 
+        index={activeStep} 
+        colorScheme="yellow" 
+        orientation="horizontal" 
+        gap='0'
+
+        minH={{ base: "80px", md: "auto" }} 
+      >
+        {steps.map((step, index) => (
+          <Step 
+            key={index} 
+            onClick={() => setActiveStep(index)} 
+            style={{ cursor: 'pointer', flex: 1 }}
+          >
+            <VStack spacing={2} w="100%">
+              <StepIndicator>
+                <StepStatus
+                  complete={<StepIcon />}
+                  incomplete={<StepNumber />}
+                  active={<StepNumber />}
+                />
+              </StepIndicator>
+
+              <Box textAlign="center" minH="32px">
+                <StepTitle 
+                  fontSize={{ base: "10px", md: "sm" }} 
+                  fontWeight="bold"
+                  lineHeight="tight"
+                >
+                  {step.title}
+                </StepTitle>
+                <StepDescription 
+                  fontSize={{ base: "9px", md: "xs" }}
+                  color="gray.500"
+                >
+                  {step.description}
+                </StepDescription>
+              </Box>
+            </VStack>
+
+            <StepSeparator 
+              style={{ 
+                top: '22px',
+                backgroundColor: '#E2E8F0' 
+              }} 
             />
-          </StepIndicator>
-
-          <Box flexShrink='0' ml={4}>
-            <StepTitle>{step.title}</StepTitle>
-            <StepDescription>{step.description}</StepDescription>
-          </Box>
-
-          <StepSeparator style={{ backgroundColor: '#E2E8F0', height: '2px', alignSelf: 'center' }} />
-        </Step>
-      ))}
-    </Stepper>
+          </Step>
+        ))}
+      </Stepper>
+    </Box>
   );
 }
 
