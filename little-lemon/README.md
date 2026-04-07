@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# 🍋 Little Lemon Restaurant - Booking App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Una aplicación web moderna y responsiva para la reserva de mesas del restaurante **Little Lemon**, desarrollada como proyecto final para la certificación de **Meta Front-End Developer**.
 
-## Available Scripts
+## 🚀 Características Principales
 
-In the project directory, you can run:
+* **Proceso de Reserva en Pasos:** Interfaz de usuario intuitiva dividida en 3 etapas (Contacto, Fecha/Hora y Detalles de Invitados).
+* **Diseño Mobile-First:** Optimización total para dispositivos móviles utilizando **Chakra UI**, incluyendo un *Stepper* adaptativo.
+* **Validación de Formularios:** Gestión robusta de datos y validaciones en tiempo real con **Formik** y **Yup**.
+* **Feedback Instantáneo:** Sistema de notificaciones y Modal de éxito tras el envío del formulario.
+* **Arquitectura Limpia:** Uso de Hooks personalizados (`useSubmit`, `useDisclosure`) y gestión de estado eficiente.
 
-### `npm start`
+## 🛠️ Tecnologías Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* **React 18** - Biblioteca principal.
+* **Chakra UI** - Sistema de diseño y componentes responsivos.
+* **Formik** - Manejo de formularios complejos.
+* **Yup** - Esquemas de validación de datos.
+* **React Router Dom** - Navegación entre secciones.
+* **Vercel** - Plataforma de despliegue y CI/CD.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📱 Vista Previa Responsiva
 
-### `npm test`
+El proyecto ha sido diseñado específicamente para resolver problemas comunes de visualización en móviles:
+* **Stepper Adaptativo:** Cambia de diseño horizontal a una columna vertical optimizada en pantallas pequeñas.
+* **Navegación Fluida:** Ajustes de padding y márgenes para evitar solapamientos con la barra de navegación fija.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📦 Instalación y Uso
 
-### `npm run build`
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/idavid80/react-meta.git
+    ```
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
+3.  **Ejecutar en modo desarrollo:**
+    ```bash
+    npm start
+    ```
+4.  **Generar build de producción:**
+    ```bash
+    npm run build
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔧 Configuración de Calidad (Linting)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Este proyecto sigue las reglas estrictas de ESLint para asegurar un código limpio. Se han resuelto advertencias de dependencias en `useEffect` y variables no utilizadas para garantizar un despliegue exitoso en entornos de Integración Continua (CI).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📄 Licencia
 
-### `npm run eject`
+Este proyecto fue realizado con fines educativos para el curso de **Meta Capstone Project**.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+`docs: add comprehensive README with project features and tech stack`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+¡Con esto tu repositorio de GitHub pasará de "un proyecto de curso" a "un proyecto de portafolio profesional"! 🚀🍋
